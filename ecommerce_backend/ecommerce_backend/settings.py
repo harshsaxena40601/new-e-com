@@ -11,6 +11,8 @@ SECRET_KEY = 'django-insecure-p*dqkc29*_xz6f2!aakd4r**5jt2n=8c_*6(mx_qk29q9%j!&-
 DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ['new-e-com.onrender.com']
+
 
 # Application definition
 INSTALLED_APPS = [

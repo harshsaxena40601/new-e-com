@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "your_app_name",  # Replace with your actual Django app name
+    "store",  # Replace with your actual Django app name
+    "products",  # Replace with your actual Django app name
 ]
 
 MIDDLEWARE = [

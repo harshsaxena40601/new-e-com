@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      .slider {
+        position: relative;
+        width: 600px;
+      }
+      .slider img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider">
+      <img id="slider-image" src="a1.jpg" alt="Slider Image" />
+      <button class="button prev" onclick="prevImage()">&#9665;</button>
+      <button class="button next" onclick="nextImage()">&#9655;</button>
+    </div>
+
+    <script>
+      const images = ["a1.jpg", "a2.jpg"];
+      let currentIndex = 0;
+
+      function prevImage() {
+        currentIndex =
+          currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+        document.getElementById("slider-image").src = images[currentIndex];
+      }
+
+      function nextImage() {
+        currentIndex =
+          currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+        document.getElementById("slider-image").src = images[currentIndex];
+      }
+    </script>
+  </body>
+</html>

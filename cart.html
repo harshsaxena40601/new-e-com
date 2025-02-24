@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="cart.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Product List</h1>
+        <div class="iconCart">
+          <button id="cartButton" class="cartButton">
+            <i class="fas fa-shopping-cart fa-lg" style="color: #727e7e"></i>
+          </button>
+          <div class="totalQuantity">0</div>
+        </div>
+      </header>
+      <div class="listProduct"></div>
+    </div>
+    <!-- <button
+      class="viewProductButton"
+      onclick="window.location.href='productDescription.html'"
+    >
+      View Product Details
+    </button> -->
+
+    <div class="cart">
+      <h2>Cart</h2>
+      <div class="listCart"></div>
+      <div class="buttons">
+        <div class="close">CLOSE</div>
+        <div class="checkout">
+          <a href="checkout.html">CHECKOUT</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="cart.js"></script>
+  </body>
+</html>

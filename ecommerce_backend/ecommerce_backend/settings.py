@@ -1,12 +1,12 @@
 import os
 from pathlib import Path
-import dj_database_url  # For handling database URL
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY SETTINGS
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "r4cJRrCnetfojAey1XbiqzYs_EdyvA4VQVQG7zz0GaJr5E6agIwO7JXtjIXUPY885SU")
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
 

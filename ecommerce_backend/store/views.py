@@ -15,3 +15,7 @@ def get_product_detail(request, pk):
     product = get_object_or_404(Product, id=pk)
     serializer = ProductSerializer(product)
     return Response(serializer.data)
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("<h1>Welcome to My E-commerce Site</h1>")

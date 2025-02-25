@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load variables from .env file
+
 import os
 from pathlib import Path
 import dj_database_url

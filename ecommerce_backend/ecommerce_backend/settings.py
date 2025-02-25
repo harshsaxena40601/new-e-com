@@ -12,7 +12,7 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # ALLOWED HOSTS (Updated)
 ALLOWED_HOSTS = [
-    "new-e-com.onrender.com",  # Render app domain (removed https://)
+    "new-e-com-wirq.onrender.com",  
     "127.0.0.1",
     "localhost"
 ]
@@ -87,6 +87,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React frontend (if applicable)
     "https://your-frontend-url.com",  # Replace with actual frontend URL
     "https://new-e-com.onrender.com",  # Allow Render frontend if applicable
+     "https://new-e-com-production.up.railway.app" # Allow Railway frontend if applicable
 ]
 
 CORS_ALLOW_CREDENTIALS = True  # Allows cookies, sessions, etc.

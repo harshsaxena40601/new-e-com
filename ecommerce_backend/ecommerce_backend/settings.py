@@ -4,16 +4,20 @@ import dj_database_url  # For handling database URL
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "your-default-secret-key")
+# SECURITY SETTINGS
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "r4cJRrCnetfojAey1XbiqzYs_EdyvA4VQVQG7zz0GaJr5E6agIwO7JXtjIXUPY885SU")
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
 
+
+# ALLOWED HOSTS (Updated)
 ALLOWED_HOSTS = [
-    "your-app-name.onrender.com",  # Replace with your actual Render app URL
+    "new-e-com.onrender.com",  # Render app domain (removed https://)
     "127.0.0.1",
     "localhost"
 ]
 
+# INSTALLED APPS
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -23,14 +27,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "store",  # Replace with your actual Django app name
-    "products",  # Replace with your actual Django app name
+    "store",
 ]
 
+# MIDDLEWARE
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # CORS Middleware
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -38,8 +42,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# URL CONFIGURATION
 ROOT_URLCONF = "ecommerce_backend.urls"
 
+# TEMPLATE SETTINGS
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -56,27 +62,34 @@ TEMPLATES = [
     },
 ]
 
+# WSGI APPLICATION
 WSGI_APPLICATION = "ecommerce_backend.wsgi.application"
 
-# Database Configuration (Uses DATABASE_URL if available)
+# DATABASE CONFIGURATION (For Local & Render Deployment)
 DATABASES = {
     "default": dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", conn_max_age=600
-    )
-}
+    
+)}
 
-# Static Files Configuration for Render
+# STATIC & MEDIA FILES CONFIGURATION
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Media Files
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# CORS Headers (Allow frontend to access API)
+# CORS HEADERS (Allow frontend to access API securely)
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Local frontend
+    "http://127.0.0.1:5500",  # VS Code Live Server
+    "http://localhost:3000",  # React frontend (if applicable)
     "https://your-frontend-url.com",  # Replace with actual frontend URL
+    "https://new-e-com.onrender.com",  # Allow Render frontend if applicable
 ]
 
+CORS_ALLOW_CREDENTIALS = True  # Allows cookies, sessions, etc.
+
+# DEFAULT PRIMARY KEY FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

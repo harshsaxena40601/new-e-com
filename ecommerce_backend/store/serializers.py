@@ -8,8 +8,8 @@ class ProductSerializer(serializers.ModelSerializer):
         if obj.image:
             request = self.context.get('request')
             if request:
-                return request.build_absolute_uri(obj.image.url)  # Full URL
-            return f"http://127.0.0.1:8000{obj.image.url}"  # Hardcoded fallback
+                return request.build_absolute_uri(obj.image.url)  # ✅ Ensures correct full URL
+            return obj.image.url  # ✅ Remove hardcoded localhost to prevent incorrect URLs
         return None
 
     class Meta:

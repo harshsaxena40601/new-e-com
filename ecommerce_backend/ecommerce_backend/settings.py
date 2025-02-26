@@ -79,7 +79,8 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "https://new-e-com-wirq.onrender.com/media/"
+
 MEDIA_ROOT = BASE_DIR / "media"
 
 # CORS HEADERS (Allow frontend to access API securely)

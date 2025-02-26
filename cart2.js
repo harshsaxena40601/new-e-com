@@ -1,7 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("Loaded cart:", cart);
-
+document.addEventListener("DOMContentLoaded", async function () {
   let cartContainer = document.querySelector(".shop");
   let totalElement = document.querySelector(".totalPrice");
   let summaryElement = document.querySelector(".right-bar");
@@ -12,10 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   cartContainer.innerHTML = ""; // Clear old cart content
 
-  if (cart.length === 0) {
-    cartContainer.innerHTML = "<p>Your cart is empty!</p>";
-    totalElement.innerText = "Total: $0.00";
-    summaryElement.innerHTML = `
+  try {
+    let response = await fetch("https://new-e-com-wirq.onrender.com/api/cart/");
+    if (!response.ok) {
+      throw new Error("Failed to fetch cart data");
+    }
+    let cart = await response.json();
+
+    console.log("Loaded cart from backend:", cart);
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>Your cart is empty!</p>";
+      totalElement.innerText = "Total: $0.00";
+      summaryElement.innerHTML = `
         <p><span>Subtotal</span> <span>$0.00</span></p>
         <hr />
         <p><span>Tax (5%)</span> <span>$0.00</span></p>
@@ -25,16 +31,16 @@ document.addEventListener("DOMContentLoaded", function () {
         <p><span>Total</span> <span>$${shipping.toFixed(2)}</span></p>
         <a href="checkout.html"><i class="fa fa-shopping-cart"></i> Checkout</a>
       `;
-    return;
-  }
+      return;
+    }
 
-  cart.forEach((item) => {
-    let itemTotal = item.price * item.quantity; // ✅ Correct total calculation
-    subtotal += itemTotal;
+    cart.forEach((item) => {
+      let itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
 
-    let cartItem = document.createElement("div");
-    cartItem.classList.add("box");
-    cartItem.innerHTML = `
+      let cartItem = document.createElement("div");
+      cartItem.classList.add("box");
+      cartItem.innerHTML = `
           <img src="${item.image}" />
           <div class="content">
             <h3>${item.productName}</h3>
@@ -43,14 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="subtotal">Subtotal: $${itemTotal.toFixed(2)}</p>
           </div>
         `;
-    cartContainer.appendChild(cartItem);
-  });
+      cartContainer.appendChild(cartItem);
+    });
 
-  let tax = subtotal * taxRate;
-  let total = subtotal + tax + shipping;
+    let tax = subtotal * taxRate;
+    let total = subtotal + tax + shipping;
 
-  // ✅ Update summary section correctly
-  summaryElement.innerHTML = `
+    summaryElement.innerHTML = `
         <p><span>Subtotal</span> <span>$${subtotal.toFixed(2)}</span></p>
         <hr />
         <p><span>Tax (5%)</span> <span>$${tax.toFixed(2)}</span></p>
@@ -61,5 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <a href="checkout.html"><i class="fa fa-shopping-cart"></i> Checkout</a>
       `;
 
-  totalElement.innerText = `Total: $${total.toFixed(2)}`; // ✅ Correct total display
+    totalElement.innerText = `Total: $${total.toFixed(2)}`;
+  } catch (error) {
+    console.error("Error fetching cart data:", error);
+    cartContainer.innerHTML =
+      "<p>Failed to load cart. Please try again later.</p>";
+  }
 });

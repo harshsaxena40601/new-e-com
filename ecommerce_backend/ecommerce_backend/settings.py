@@ -79,8 +79,7 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = "https://new-e-com-wirq.onrender.com/media/"
-
+MEDIA_URL = "/media/"  # ✅ Fixed: Use relative URL
 MEDIA_ROOT = BASE_DIR / "media"
 
 # CORS HEADERS (Allow frontend to access API securely)
@@ -92,7 +91,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 # CSRF TRUSTED ORIGINS
 CSRF_TRUSTED_ORIGINS = [
-    "https://Skhandicraft.com",
+    "https://www.skhandicraft.com",
 ]
 
 # SECURITY ENHANCEMENTS (for production)

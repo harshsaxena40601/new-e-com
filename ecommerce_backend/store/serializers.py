@@ -7,9 +7,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_image(self, obj):
         if obj.image:
             request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri(obj.image.url)  # ✅ Ensures correct full URL
-            return obj.image.url  # ✅ Remove hardcoded localhost to prevent incorrect URLs
+            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
         return None
 
     class Meta:

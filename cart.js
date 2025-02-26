@@ -4,9 +4,23 @@ let cart = document.querySelector(".cart");
 let container = document.querySelector(".container");
 let close = document.querySelector(".close");
 
-const BASE_URL = "http://127.0.0.1:8000"; // Change to your actual backend URL
+// ✅ Set the BASE_URL to your deployed Django backend
+const BASE_URL = "https://new-e-com-wirq.onrender.com";
 
-// Function to toggle the cart view
+// ✅ Fetch products from backend
+fetch(`${BASE_URL}/api/products/`)
+  .then((response) => response.json())
+  .then((data) => {
+    if (Array.isArray(data)) {
+      products = data;
+      addDataToHTML();
+    } else {
+      console.error("Invalid product data format", data);
+    }
+  })
+  .catch((error) => console.error("Error fetching products:", error));
+
+// ✅ Toggle the cart view
 function toggleCart() {
   if (cart.style.right === "-100%" || cart.style.right === "") {
     cart.style.right = "0";
@@ -26,19 +40,6 @@ close.addEventListener("click", function () {
 
 let products = [];
 
-// ✅ Fetch products from Django backend API
-fetch(`${BASE_URL}/api/products/`)
-  .then((response) => response.json())
-  .then((data) => {
-    if (Array.isArray(data)) {
-      products = data;
-      addDataToHTML();
-    } else {
-      console.error("Invalid product data format", data);
-    }
-  })
-  .catch((error) => console.error("Error fetching products:", error));
-
 // ✅ Display products in the HTML
 function addDataToHTML() {
   let listProductHTML = document.querySelector(".listProduct");
@@ -51,7 +52,7 @@ function addDataToHTML() {
 
       let productImage = product.image.startsWith("http")
         ? product.image
-        : `${BASE_URL}${product.image}`;
+        : `${BASE_URL}${product.image}`; // Ensure correct image path
 
       newProduct.innerHTML = `
             <img src="${productImage}" alt="${product.name}">

@@ -1,3 +1,15 @@
+fetch("https://new-e-com-wirq.onrender.com/api/products/")
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error("Error fetching data:", error));
+
+import axios from "axios";
+
+axios
+  .get("https://new-e-com-wirq.onrender.com/api/products/")
+  .then((response) => console.log(response.data))
+  .catch((error) => console.error("Error fetching data:", error));
+
 document.addEventListener("DOMContentLoaded", async function () {
   // Get product ID from the URL (assuming the format is product.html?id=1)
   const urlParams = new URLSearchParams(window.location.search);
@@ -9,9 +21,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   try {
-    // Fetch product details from the API
+    // ✅ Updated API URL to use the deployed backend on Render
     const response = await fetch(
-      `http://127.0.0.1:8000/api/products/${productId}/`
+      `https://new-e-com-wirq.onrender.com/api/products/${productId}/`
     );
 
     if (!response.ok) {

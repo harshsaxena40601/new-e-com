@@ -19,3 +19,10 @@ from django.http import HttpResponse
 
 def home(request):
     return HttpResponse("<h1>Welcome to My E-commerce Site</h1>")
+from django.http import JsonResponse
+from django.core.management import call_command
+
+def run_migrations(request):
+    call_command("makemigrations", "store")
+    call_command("migrate")
+    return JsonResponse({"status": "Migrations applied!"})

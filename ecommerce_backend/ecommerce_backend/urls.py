@@ -31,3 +31,8 @@ urlpatterns = [
 # ✅ Serve Media Files in Development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+from django.urls import path, include
+
+urlpatterns = [
+    path("api/", include("store.urls")),  # Ensure "store.urls" is included!
+]

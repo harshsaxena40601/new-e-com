@@ -1,25 +1,21 @@
 from dotenv import load_dotenv
 import os
-
-load_dotenv()  # Load variables from .env file
-
-import os
 from pathlib import Path
-import dj_database_url
 
+# Load environment variables
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(dotenv_path=str(BASE_DIR / ".env"))
 
 # SECURITY SETTINGS
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "r4cJRrCnetfojAey1XbiqzYs_EdyvA4VQVQG7zz0GaJr5E6agIwO7JXtjIXUPY885SU")
-DEBUG = os.getenv("DEBUG", "False") == "True"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "your-secret-key-here")
 
+DEBUG = os.getenv("DEBUG", "False").strip().lower() in ["true", "1", "yes"]
 
-
-# ALLOWED HOSTS (Updated)
+# ALLOWED HOSTS
 ALLOWED_HOSTS = [
-    "new-e-com-wirq.onrender.com",  
-    "127.0.0.1",
-    "localhost"
+    os.getenv("ALLOWED_HOST_1", "new-e-com-wirq.onrender.com"),
+    os.getenv("ALLOWED_HOST_2", "127.0.0.1"),
+    os.getenv("ALLOWED_HOST_3", "localhost"),
 ]
 
 # INSTALLED APPS
@@ -39,7 +35,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # CORS Middleware
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -70,16 +66,16 @@ TEMPLATES = [
 # WSGI APPLICATION
 WSGI_APPLICATION = "ecommerce_backend.wsgi.application"
 
-# DATABASE CONFIGURATION (For Local & Render Deployment)
+# DATABASE CONFIGURATION (Using SQLite)
 DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", conn_max_age=600
-    
-)}
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # STATIC & MEDIA FILES CONFIGURATION
 STATIC_URL = "/static/"
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
@@ -88,14 +84,22 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # CORS HEADERS (Allow frontend to access API securely)
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",  # VS Code Live Server
-    "http://localhost:3000",  # React frontend (if applicable)
-    "https://your-frontend-url.com",  # Replace with actual frontend URL
-    "https://new-e-com.onrender.com",  # Allow Render frontend if applicable
-     "https://new-e-com-production.up.railway.app" # Allow Railway frontend if applicable
+    "https://Skhandicraft.com",
+    "https://new-e-com-wirq.onrender.com",
+]
+CORS_ALLOW_CREDENTIALS = True
+
+# CSRF TRUSTED ORIGINS
+CSRF_TRUSTED_ORIGINS = [
+    "https://Skhandicraft.com",
 ]
 
-CORS_ALLOW_CREDENTIALS = True  # Allows cookies, sessions, etc.
+# SECURITY ENHANCEMENTS (for production)
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # DEFAULT PRIMARY KEY FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

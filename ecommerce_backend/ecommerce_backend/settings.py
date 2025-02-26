@@ -85,7 +85,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # CORS HEADERS (Allow frontend to access API securely)
 CORS_ALLOWED_ORIGINS = [
-    "https://Skhandicraft.com",
+    "https://www.skhandicraft.com",
     "https://new-e-com-wirq.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True

@@ -26,3 +26,8 @@ def run_migrations(request):
     call_command("makemigrations", "store")
     call_command("migrate")
     return JsonResponse({"status": "Migrations applied!"})
+from django.http import JsonResponse
+
+def home(request):
+    return JsonResponse({"message": "Welcome to the E-Commerce API!"})
+

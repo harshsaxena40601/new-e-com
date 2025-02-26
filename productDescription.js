@@ -1,17 +1,4 @@
-fetch("https://new-e-com-wirq.onrender.com/api/products/")
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error("Error fetching data:", error));
-
-import axios from "axios";
-
-axios
-  .get("https://new-e-com-wirq.onrender.com/api/products/")
-  .then((response) => console.log(response.data))
-  .catch((error) => console.error("Error fetching data:", error));
-
 document.addEventListener("DOMContentLoaded", async function () {
-  // Get product ID from the URL (assuming the format is product.html?id=1)
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
 
@@ -21,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   try {
-    // ✅ Updated API URL to use the deployed backend on Render
     const response = await fetch(
       `https://new-e-com-wirq.onrender.com/api/products/${productId}/`
     );
@@ -32,15 +18,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const product = await response.json();
 
-    // Update the HTML elements with product data
-    document.querySelector(".product-main-image").src = product.image;
-    document.querySelector(".product-main-image").alt = product.name;
-    document.querySelector(".product-name").textContent = product.name;
-    document.querySelector(".product-price").textContent = product.price;
+    // Ensure elements exist before updating
+    const productImage = document.querySelector(".product-main-image");
+    const productName = document.querySelector(".product-name");
+    const productPrice = document.querySelector(".product-price");
+    const productDescription = document.querySelector(".product-description");
 
-    // ✅ FIX: Update the description paragraph properly
-    document.querySelector(".product-description").textContent =
-      product.description;
+    if (productImage) {
+      productImage.src = product.image;
+      productImage.alt = product.name;
+    }
+
+    if (productName) productName.textContent = product.name;
+    if (productPrice)
+      productPrice.textContent = `$${parseFloat(product.price).toFixed(2)}`;
+    if (productDescription)
+      productDescription.textContent = product.description;
   } catch (error) {
     console.error("Error fetching product data:", error);
   }

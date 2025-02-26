@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     console.log("Loaded cart from backend:", cart);
 
-    if (cart.length === 0) {
+    if (!Array.isArray(cart) || cart.length === 0) {
       cartContainer.innerHTML = "<p>Your cart is empty!</p>";
       totalElement.innerText = "Total: $0.00";
       summaryElement.innerHTML = `
@@ -40,8 +40,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       let cartItem = document.createElement("div");
       cartItem.classList.add("box");
+      let itemImage = item.image.startsWith("http")
+        ? item.image
+        : `https://new-e-com-wirq.onrender.com${item.image}`;
       cartItem.innerHTML = `
-          <img src="${item.image}" />
+          <img src="${itemImage}" />
           <div class="content">
             <h3>${item.productName}</h3>
             <h4>Price: $${item.price}</h4>

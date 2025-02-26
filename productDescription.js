@@ -38,3 +38,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error fetching product data:", error);
   }
 });
+if (productImage) {
+  let productImageUrl = product.image.startsWith("http")
+    ? product.image
+    : `https://new-e-com-wirq.onrender.com${product.image}`;
+
+  console.log("Final Product Image URL:", productImageUrl); // Debugging
+
+  productImage.src = productImageUrl;
+  productImage.alt = product.name;
+}

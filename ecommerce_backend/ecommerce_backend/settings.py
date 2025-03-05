@@ -77,7 +77,7 @@ DATABASES = {
         "NAME": "ecommerce_db",  # Your MySQL database name
         "USER": "root",           # Default MySQL username
         "PASSWORD": "Harsh@244901",           # Leave empty if no password was set
-        "HOST": "127.0.0.1",      # Localhost
+        "HOST": "new-e-com-wirq.onrender.com",      # Localhost
         "PORT": "3306",           # MySQL default port
     }
 }

@@ -70,10 +70,15 @@ WSGI_APPLICATION = "ecommerce_backend.wsgi.application"
 # DATABASE CONFIGURATION (Using SQLite)
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "ecommerce_db",  # Your MySQL database name
+        "USER": "root",           # Default MySQL username
+        "PASSWORD": "Harsh@244901",           # Leave empty if no password was set
+        "HOST": "127.0.0.1",      # Localhost
+        "PORT": "3306",           # MySQL default port
     }
 }
+
 
 # STATIC & MEDIA FILES CONFIGURATION
 STATIC_URL = "/static/"

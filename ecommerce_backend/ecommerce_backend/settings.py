@@ -72,15 +72,16 @@ WSGI_APPLICATION = "ecommerce_backend.wsgi.application"
 
 # DATABASE CONFIGURATION (Using SQLite)
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "ecommerce_db",  # Your MySQL database name
-        "USER": "root",           # Default MySQL username
-        "PASSWORD": "Harsh@244901",           # Leave empty if no password was set
-        "HOST": "127.0.0.1",      # Localhost
-        "PORT": "3306",           # MySQL default port
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecommerce_db_5g24',
+        'USER': 'ecommerce_db_5g24_user',
+        'PASSWORD': '0P14lcOOTz8QpboX5BgbSpvdnBEbUbBt',
+        'HOST': 'dpg-cv4qru52ng1s73bqql80-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
+
 
 
 # STATIC & MEDIA FILES CONFIGURATION

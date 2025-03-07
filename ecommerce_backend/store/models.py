@@ -1,5 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User  # ✅ Import User model
+from django.db import models
+from cloudinary.models import CloudinaryField
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    image = CloudinaryField('image')
+
 
 # ✅ Import Product model before using it
 class Product(models.Model):  

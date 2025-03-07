@@ -3,6 +3,15 @@ import os
 from pathlib import Path
 import pymysql
 pymysql.install_as_MySQLdb()
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+    cloud_name="duhtpjflg",
+    api_key="127956619714857",
+    api_secret="GYk7RQ2uSshx_xLsLDjm_D3v79c"
+)
 
 
 # Load environment variables
@@ -32,6 +41,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "store",
+    'cloudinary', 
+    'cloudinary_storage',
 ]
 
 # MIDDLEWARE

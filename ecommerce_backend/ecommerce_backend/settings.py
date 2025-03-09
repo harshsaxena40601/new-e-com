@@ -2,35 +2,36 @@ from dotenv import load_dotenv
 import os
 from pathlib import Path
 import pymysql
-pymysql.install_as_MySQLdb()
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-cloudinary.config(
-    cloud_name="duhtpjflg",
-    api_key="127956619714857",
-    api_secret="GYk7RQ2uSshx_xLsLDjm_D3v79c"
-)
-
+# MySQL setup
+pymysql.install_as_MySQLdb()
 
 # Load environment variables
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(dotenv_path=str(BASE_DIR / ".env"))
 
-# SECURITY SETTINGS
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "your-secret-key-here")
+# Cloudinary Configuration
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME", "duhtpjflg"),
+    api_key=os.getenv("CLOUDINARY_API_KEY", "127956619714857"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET", "GYk7RQ2uSshx_xLsLDjm_D3v79c")
+)
 
+# Security Settings
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "your-secret-key-here")
 DEBUG = os.getenv("DEBUG", "True").strip().lower() in ["true", "1", "yes"]
 
-# ALLOWED HOSTS
 ALLOWED_HOSTS = [
-    os.getenv("ALLOWED_HOST_1", "new-e-com-wirq.onrender.com"),
-    os.getenv("ALLOWED_HOST_2", "127.0.0.1"),
-    os.getenv("ALLOWED_HOST_3", "localhost"),
+    "127.0.0.1",
+    "localhost",
+    "new-e-com-wirq.onrender.com",
+    os.getenv("ALLOWED_HOST", "")
 ]
 
-# INSTALLED APPS
+# Installed Apps
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,14 +42,14 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "store",
-    'cloudinary', 
-    'cloudinary_storage',
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
-# MIDDLEWARE
+# Middleware
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", 
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -58,10 +59,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# URL CONFIGURATION
+# URL Configuration
 ROOT_URLCONF = "ecommerce_backend.urls"
 
-# TEMPLATE SETTINGS
+# Templates
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -78,49 +79,49 @@ TEMPLATES = [
     },
 ]
 
-# WSGI APPLICATION
+# WSGI Application
 WSGI_APPLICATION = "ecommerce_backend.wsgi.application"
 
-# DATABASE CONFIGURATION (Using SQLite)
+# Database Configuration
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecommerce_db_5g24',
-        'USER': 'ecommerce_db_5g24_user',
-        'PASSWORD': '0P14lcOOTz8QpboX5BgbSpvdnBEbUbBt',
-        'HOST': 'dpg-cv4qru52ng1s73bqql80-a.oregon-postgres.render.com',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME", "ecommerce_db_5g24"),
+        "USER": os.getenv("DB_USER", "ecommerce_db_5g24_user"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "0P14lcOOTz8QpboX5BgbSpvdnBEbUbBt"),
+        "HOST": os.getenv("DB_HOST", "dpg-cv4qru52ng1s73bqql80-a.oregon-postgres.render.com"),
+        "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
 
-
-
-# STATIC & MEDIA FILES CONFIGURATION
+# Static & Media Files
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MEDIA_URL = "/media/"  # ✅ Fixed: Use relative URL
-MEDIA_ROOT = BASE_DIR / "media"
 
-# CORS HEADERS (Allow frontend to access API securely)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+# CORS Headers
 CORS_ALLOWED_ORIGINS = [
     "https://www.skhandicraft.com",
     "https://new-e-com-wirq.onrender.com",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
-# CSRF TRUSTED ORIGINS
+# CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = [
     "https://www.skhandicraft.com",
 ]
 
-# SECURITY ENHANCEMENTS (for production)
+# Security Enhancements (For Production)
 if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# DEFAULT PRIMARY KEY FIELD
+# Default Primary Key Field Type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

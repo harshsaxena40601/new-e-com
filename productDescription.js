@@ -1,18 +1,10 @@
-// ✅ Select Elements
-const minusButton = document.querySelector(
-  ".quantity-input button:first-child"
-);
-const plusButton = document.querySelector(".quantity-input button:last-child");
-const quantityInput = document.querySelector(".quantity-input input");
-const addToCartBtn = document.querySelector(".btn-primary");
+// ✅ Store Cart Data
+let cartData = JSON.parse(localStorage.getItem("cart")) || [];
 
 // ✅ Set API Base URL
 const BASE_URL = "https://new-e-com-wirq.onrender.com";
 
-// ✅ Store Cart Data
-let cartData = JSON.parse(localStorage.getItem("cart")) || [];
-
-// ✅ Product Data (This would normally come from an API)
+// ✅ Product Data (Hardcoded for this specific page)
 const currentProduct = {
   id: "product-001",
   name: "Quality Men's Hoodie for Winter",
@@ -20,63 +12,121 @@ const currentProduct = {
   image: "image_large.jpg",
 };
 
-// ✅ Update Quantity
-function updateQuantity(type) {
-  let currentValue = parseInt(quantityInput.value);
-
-  if (type === "+") {
-    quantityInput.value = currentValue + 1;
-  } else if (type === "-" && currentValue > 1) {
+// ✅ Product Quantity Functions
+function decreaseQuantity() {
+  const quantityInput = document.querySelector(".quantity-input input");
+  const currentValue = parseInt(quantityInput.value);
+  if (currentValue > 1) {
     quantityInput.value = currentValue - 1;
   }
 }
 
-// ✅ Add to Cart
-function addToCart() {
-  const quantity = parseInt(quantityInput.value);
-  const productId = currentProduct.id;
-  const productName = currentProduct.name;
-  const price = currentProduct.price;
-  const image = currentProduct.image;
+function increaseQuantity() {
+  const quantityInput = document.querySelector(".quantity-input input");
+  const currentValue = parseInt(quantityInput.value);
+  quantityInput.value = currentValue + 1;
+}
 
-  // Check if product already exists in cart
-  let existingItem = cartData.find((item) => item.productId === productId);
+// ✅ Add to Cart Function
+function addToCart() {
+  const quantityInput = document.querySelector(".quantity-input input");
+  const quantity = parseInt(quantityInput.value);
+
+  let existingItem = cartData.find(
+    (item) => item.productId === currentProduct.id
+  );
 
   if (existingItem) {
     existingItem.quantity += quantity;
   } else {
-    cartData.push({ productId, productName, price, image, quantity });
+    cartData.push({
+      productId: currentProduct.id,
+      productName: currentProduct.name,
+      price: currentProduct.price,
+      image: currentProduct.image,
+      quantity: quantity,
+    });
   }
 
-  // Save to localStorage
   localStorage.setItem("cart", JSON.stringify(cartData));
-
-  // Show confirmation to user
-  alert(`${quantity} ${productName} added to cart!`);
+  updateCartBadge();
+  alert(`${quantity} item(s) added to your cart!`);
 }
 
-// ✅ Event Listeners
-document.addEventListener("DOMContentLoaded", () => {
-  // Setup quantity buttons
-  if (minusButton) {
-    minusButton.addEventListener("click", (e) => {
+// ✅ Update Cart Badge (small indicator showing cart items)
+function updateCartBadge() {
+  // You can add a cart badge later if needed
+  let totalItems = 0;
+  cartData.forEach((item) => {
+    totalItems += item.quantity;
+  });
+
+  // If you add a cart badge to your HTML, uncomment this:
+  // const badge = document.querySelector('.cart-badge');
+  // if (badge) badge.textContent = totalItems;
+
+  console.log(`Cart updated: ${totalItems} items`);
+}
+
+// ✅ Initialize Page
+document.addEventListener("DOMContentLoaded", function () {
+  // Set up decrease quantity button
+  const decreaseBtn = document.querySelector(
+    ".quantity-input button:first-child"
+  );
+  if (decreaseBtn) {
+    decreaseBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      updateQuantity("-");
+      decreaseQuantity();
     });
   }
 
-  if (plusButton) {
-    plusButton.addEventListener("click", (e) => {
+  // Set up increase quantity button
+  const increaseBtn = document.querySelector(
+    ".quantity-input button:last-child"
+  );
+  if (increaseBtn) {
+    increaseBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      updateQuantity("+");
+      increaseQuantity();
     });
   }
 
-  // Setup add to cart button
+  // Set up add to cart button
+  const addToCartBtn = document.querySelector(".btn-primary");
   if (addToCartBtn) {
-    addToCartBtn.addEventListener("click", (e) => {
+    addToCartBtn.addEventListener("click", function (e) {
       e.preventDefault();
       addToCart();
     });
   }
+
+  // Initialize cart badge
+  updateCartBadge();
+
+  // Fetch Product Details (for future use)
+  // This would normally fetch the product data from your API
+  // but we're using the hardcoded data for now
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+
+  if (productId) {
+    console.log(`Product ID from URL: ${productId}`);
+    // You could fetch product details here in the future
+    // fetchProductDetails(productId);
+  }
 });
+
+// ✅ Function to fetch product details (for future implementation)
+async function fetchProductDetails(productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/products/${productId}/`);
+    if (!response.ok) throw new Error("Failed to fetch product details");
+
+    const product = await response.json();
+    console.log("Product details:", product);
+    // You would update the page with product details here
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+  }
+}

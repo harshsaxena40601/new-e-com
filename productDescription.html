@@ -30,118 +30,87 @@
 
       img {
         max-width: 100%;
+        height: auto;
       }
 
       ul {
         list-style-position: inside;
         margin: 15px 0;
+        padding-left: 10px;
       }
 
-      /* Header styles */
+      /* Header styles - simplified */
       header {
         background-color: white;
         border-bottom: 1px solid #dee2e6;
-        padding: 15px 0;
+        padding: 10px 0;
       }
 
       .container {
-        width: 90%;
+        width: 95%;
         max-width: 1200px;
         margin: 0 auto;
       }
 
       .header-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .logo-container {
-        flex: 0 0 auto;
-      }
-
-      .logo-container img {
-        height: 90px;
-      }
-
-      .search-container {
-        flex: 1 1 300px;
-      }
-
-      .search-box {
-        display: flex;
-        width: 100%;
-      }
-
-      .search-box input {
-        flex: 1;
-        padding: 8px 12px;
-        border: 1px solid #ced4da;
-        border-radius: 4px 0 0 4px;
-        outline: none;
-      }
-
-      .search-box button {
-        background-color: #0d6efd;
-        border: none;
-        color: white;
-        padding: 8px 15px;
-        border-radius: 0 4px 4px 0;
-        cursor: pointer;
       }
 
       /* Product section */
       .product-section {
-        padding: 40px 0;
+        padding: 20px 0;
       }
 
       .product-container {
         display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
+        flex-direction: column;
+        gap: 20px;
       }
 
       .product-image {
-        flex: 1 1 400px;
+        width: 100%;
       }
 
       .image-container {
         border: 1px solid #dee2e6;
         border-radius: 10px;
-        padding: 10px;
+        padding: 5px;
         text-align: center;
       }
 
       .image-container img {
         border-radius: 8px;
+        max-height: 350px;
+        object-fit: contain;
       }
 
       .product-details {
-        flex: 1 1 400px;
+        width: 100%;
       }
 
       .product-title {
-        font-size: 24px;
+        font-size: 20px;
         color: #212529;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
       }
 
       .product-rating {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
+        gap: 10px;
       }
 
       .stars {
         color: #ffc107;
-        margin-right: 10px;
+        margin-right: 5px;
       }
 
       .orders,
       .stock {
-        margin-left: 15px;
         color: #6c757d;
       }
 
@@ -150,26 +119,27 @@
       }
 
       .price {
-        margin-bottom: 15px;
+        margin-bottom: 12px;
       }
 
       .price-value {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
       }
 
       .price-unit {
         color: #6c757d;
+        font-size: 14px;
       }
 
       .divider {
         height: 1px;
         background-color: #dee2e6;
-        margin: 20px 0;
+        margin: 15px 0;
       }
 
       .quantity-container {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
 
       .quantity-label {
@@ -179,14 +149,19 @@
 
       .quantity-input {
         display: flex;
-        width: 150px;
+        width: 120px;
       }
 
       .quantity-input button {
         background-color: #f8f9fa;
         border: 1px solid #ced4da;
-        width: 40px;
+        width: 35px;
+        height: 35px;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
       }
 
       .quantity-input button:first-child {
@@ -203,19 +178,22 @@
         border-left: none;
         border-right: none;
         text-align: center;
-        padding: 8px;
+        padding: 5px;
+        height: 35px;
       }
 
       .btn-primary {
         display: inline-block;
         background-color: #0d6efd;
         color: white;
-        padding: 12px 25px;
+        padding: 12px 20px;
         border-radius: 4px;
         cursor: pointer;
         font-weight: bold;
         border: none;
         font-size: 16px;
+        width: 100%;
+        text-align: center;
       }
 
       .btn-primary:hover {
@@ -231,46 +209,52 @@
         background-color: #0d6efd;
         color: white;
         text-align: center;
-        padding: 20px 0;
-        margin-top: 30px;
+        padding: 15px 0;
+        margin-top: 20px;
+        font-size: 14px;
       }
 
       .payment-icons {
-        margin-top: 10px;
+        margin-top: 8px;
       }
 
       .payment-icons i {
         margin: 0 5px;
-        font-size: 24px;
+        font-size: 20px;
       }
 
       /* Media queries for responsiveness */
-      @media (max-width: 768px) {
+      @media (min-width: 768px) {
         .product-container {
-          flex-direction: column;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 30px;
+        }
+
+        .product-image {
+          flex: 1 1 300px;
+        }
+
+        .product-details {
+          flex: 1 1 300px;
+        }
+
+        .product-title {
+          font-size: 24px;
+        }
+
+        .btn-primary {
+          width: auto;
         }
       }
     </style>
   </head>
   <body>
-    <!-- Header -->
+    <!-- Header - Simplified -->
     <header>
       <div class="container">
         <div class="header-container">
-          <div class="logo-container">
-            <a href="https://www.skhandicraft.com/" target="_blank">
-              <img src="logo.png" alt="Skhandicraft Logo" />
-            </a>
-          </div>
-
-          <div class="search-container">
-            <div class="search-box">
-              <input type="search" placeholder="Search" />
-              <button>
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
+          <!-- Logo and search bar removed -->
         </div>
       </div>
     </header>
@@ -318,7 +302,7 @@
             </ul>
 
             <div class="divider"></div>
-            <!-- This is just the section that needs to be modified in your HTML -->
+
             <div class="quantity-container">
               <label class="quantity-label">Quantity</label>
               <div class="quantity-input">

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  let cartContainer = document.querySelector(".shop");
-  let totalElement = document.querySelector(".totalPrice");
-  let summaryElement = document.querySelector(".right-bar");
+  let cartContainer = document.querySelector(".listProduct");
+  let totalElement = document.querySelector(".totalQuantity");
+  let summaryElement = document.querySelector(".cart");
 
   let subtotal = 0;
   let shipping = 15; // Flat shipping fee
@@ -39,16 +39,16 @@ document.addEventListener("DOMContentLoaded", async function () {
       subtotal += itemTotal;
 
       let cartItem = document.createElement("div");
-      cartItem.classList.add("box");
+      cartItem.classList.add("productBox");
       let itemImage = item.image.startsWith("http")
         ? item.image
         : `https://new-e-com-wirq.onrender.com${item.image}`;
       cartItem.innerHTML = `
           <img src="${itemImage}" />
-          <div class="content">
+          <div class="productContent">
             <h3>${item.productName}</h3>
             <h4>Price: $${item.price}</h4>
-            <p class="unit">Quantity: ${item.quantity}</p>
+            <p class="quantity">Quantity: ${item.quantity}</p>
             <p class="subtotal">Subtotal: $${itemTotal.toFixed(2)}</p>
           </div>
         `;

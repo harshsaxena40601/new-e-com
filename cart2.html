@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!--divinectorweb.com-->
   <head>
     <meta charset="UTF-8" />
-    <title>Shopping Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="cart.css" />
     <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
-      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
-    <link href="cart2.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="wrapper">
-      <h1>Shopping Cart</h1>
-      <div class="project">
-        <div class="shop">
-          <div class="box">
-            <img src="IMG-20241205-WA0017.jpg" />
-            <div class="content">
-              <h3>Product 1</h3>
-              <h4>Price: $40</h4>
-              <p class="unit">Quantity: <input name="" value="2" /></p>
-              <p class="btn-area">
-                <i aria-hidden="true" class="fa fa-trash"></i>
-                <span class="btn2">Remove</span>
-              </p>
-            </div>
-          </div>
-          <div class="box">
-            <img src="IMG-20241205-WA0018.jpg" />
-            <div class="content">
-              <h3>Product 2</h3>
-              <h4>Price: $40</h4>
-              <p class="unit">Quantity: <input name="" value="1" /></p>
-              <p class="btn-area">
-                <i aria-hidden="true" class="fa fa-trash"></i>
-                <span class="btn2">Remove</span>
-              </p>
-            </div>
-          </div>
-          <div class="box">
-            <img src="IMG-20241205-WA0019.jpg" />
-            <div class="content">
-              <h3>Product 3</h3>
-              <h4>Price: $250</h4>
-              <p class="unit">Quantity: <input name="" value="0" /></p>
-              <p class="btn-area">
-                <i aria-hidden="true" class="fa fa-trash"></i>
-                <span class="btn2">Remove</span>
-              </p>
-            </div>
+    <div class="container">
+      <header>
+        <h1>Product List</h1>
+        <div class="iconCart">
+          <button id="cartButton" class="cartButton">
+            <i class="fas fa-shopping-cart fa-lg" style="color: #727e7e"></i>
+          </button>
+          <div class="totalQuantity">0</div>
+        </div>
+      </header>
+      <div class="listProduct">
+        <div class="productBox">
+          <img src="IMG-20241205-WA0017.jpg" />
+          <div class="productContent">
+            <h3>Product 1</h3>
+            <h4>Price: $40</h4>
+            <p class="quantity">Quantity: <input name="" value="2" /></p>
+            <p class="removeArea">
+              <i aria-hidden="true" class="fa fa-trash"></i>
+              <span class="removeButton">Remove</span>
+            </p>
           </div>
         </div>
-        <div class="right-bar">
-          <p><span>Subtotal</span> <span>$120</span></p>
-          <hr />
-          <p><span>Tax (5%)</span> <span>$6</span></p>
-          <hr />
-          <p><span>Shipping</span> <span>&#8377 15</span></p>
-          <hr />
-          <p><span>Total</span> <span>&#8377 141</span></p>
-          <a href="checkout.html"
-            ><i class="fa fa-shopping-cart"></i>Checkout</a
-          >
+        <div class="productBox">
+          <img src="IMG-20241205-WA0018.jpg" />
+          <div class="productContent">
+            <h3>Product 2</h3>
+            <h4>Price: $40</h4>
+            <p class="quantity">Quantity: <input name="" value="1" /></p>
+            <p class="removeArea">
+              <i aria-hidden="true" class="fa fa-trash"></i>
+              <span class="removeButton">Remove</span>
+            </p>
+          </div>
+        </div>
+        <div class="productBox">
+          <img src="IMG-20241205-WA0019.jpg" />
+          <div class="productContent">
+            <h3>Product 3</h3>
+            <h4>Price: $250</h4>
+            <p class="quantity">Quantity: <input name="" value="0" /></p>
+            <p class="removeArea">
+              <i aria-hidden="true" class="fa fa-trash"></i>
+              <span class="removeButton">Remove</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart">
+      <h2>Cart</h2>
+      <div class="listCart"></div>
+      <div class="buttons">
+        <div class="close">CLOSE</div>
+        <div class="checkout">
+          <a href="checkout.html">CHECKOUT</a>
         </div>
       </div>
     </div>

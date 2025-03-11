@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Details</title>
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="cart.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <style>
       /* Reset and base styles */
@@ -39,28 +40,59 @@
         padding-left: 10px;
       }
 
-      /* Header styles - simplified */
-      header {
-        background-color: white;
-        border-bottom: 1px solid #dee2e6;
-        padding: 10px 0;
-      }
-
+      /* Container */
       .container {
         width: 95%;
         max-width: 1200px;
         margin: 0 auto;
       }
 
-      .header-container {
+      /* Header styles */
+      header {
+        background-color: white;
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px 0;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
       }
 
+      header h1 {
+        font-size: 24px;
+      }
+
+      .iconCart {
+        position: relative;
+      }
+
+      .cartButton {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 24px;
+      }
+
+      .totalQuantity {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+      }
+
       /* Product section */
-      .product-section {
+      .listProduct {
         padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
       }
 
       .product-container {
@@ -96,26 +128,14 @@
         margin-bottom: 12px;
       }
 
-      .product-rating {
+      .product-status {
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
         margin-bottom: 12px;
-        gap: 10px;
-      }
-
-      .stars {
-        color: #ffc107;
-        margin-right: 5px;
-      }
-
-      .orders,
-      .stock {
-        color: #6c757d;
       }
 
       .stock {
         color: #198754;
+        font-weight: 500;
       }
 
       .price {
@@ -182,7 +202,7 @@
         height: 35px;
       }
 
-      .btn-primary {
+      .checkout {
         display: inline-block;
         background-color: #0d6efd;
         color: white;
@@ -192,35 +212,76 @@
         font-weight: bold;
         border: none;
         font-size: 16px;
-        width: 100%;
         text-align: center;
       }
 
-      .btn-primary:hover {
+      .checkout a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .checkout:hover {
         background-color: #0b5ed7;
       }
 
-      .btn-primary i {
-        margin-right: 8px;
+      /* Cart styles */
+      .cart {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 400px;
+        max-width: 80%;
+        height: 100vh;
+        background-color: white;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
       }
 
-      /* Footer styles */
-      footer {
+      .cart.active {
+        right: 0;
+      }
+
+      .cart h2 {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 10px;
+      }
+
+      .listCart {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .close,
+      .checkout {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .close {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        flex: 1;
+      }
+
+      .checkout {
         background-color: #0d6efd;
         color: white;
-        text-align: center;
-        padding: 15px 0;
-        margin-top: 20px;
-        font-size: 14px;
-      }
-
-      .payment-icons {
-        margin-top: 8px;
-      }
-
-      .payment-icons i {
-        margin: 0 5px;
-        font-size: 20px;
+        border: none;
+        flex: 1;
       }
 
       /* Media queries for responsiveness */
@@ -242,26 +303,22 @@
         .product-title {
           font-size: 24px;
         }
-
-        .btn-primary {
-          width: auto;
-        }
       }
     </style>
   </head>
   <body>
-    <!-- Header - Simplified -->
-    <header>
-      <div class="container">
-        <div class="header-container">
-          <!-- Logo and search bar removed -->
+    <div class="container">
+      <header>
+        <h1>Product Details</h1>
+        <div class="iconCart">
+          <button id="cartButton" class="cartButton">
+            <i class="fas fa-shopping-cart fa-lg" style="color: #727e7e"></i>
+          </button>
+          <div class="totalQuantity">0</div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <!-- Product Section -->
-    <section class="product-section">
-      <div class="container">
+      <div class="listProduct">
         <div class="product-container">
           <div class="product-image">
             <div class="image-container">
@@ -274,16 +331,7 @@
           <div class="product-details">
             <h4 class="product-title">Quality Men's Hoodie for Winter</h4>
 
-            <div class="product-rating">
-              <div class="stars">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <span>4.5</span>
-              </div>
-              <span class="orders">154 orders</span>
+            <div class="product-status">
               <span class="stock">In stock</span>
             </div>
 
@@ -312,24 +360,25 @@
               </div>
             </div>
 
-            <a href="#" class="btn-primary">
+            <a href="#" class="checkout">
               <i class="fa fa-shopping-basket"></i> Add to cart
             </a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-      <p>© 2025 Skhandicraft. All rights reserved.</p>
-      <div class="payment-icons">
-        <i class="fab fa-cc-visa"></i>
-        <i class="fab fa-cc-mastercard"></i>
-        <i class="fab fa-cc-paypal"></i>
+    <div class="cart">
+      <h2>Cart</h2>
+      <div class="listCart"></div>
+      <div class="buttons">
+        <div class="close">CLOSE</div>
+        <div class="checkout">
+          <a href="checkout.html">CHECKOUT</a>
+        </div>
       </div>
-    </footer>
+    </div>
 
-    <script src="productDescription.js"></script>
+    <script src="cart.js"></script>
   </body>
 </html>

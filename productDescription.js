@@ -1,9 +1,9 @@
 // ✅ Select Elements
 const productTitle = document.querySelector(".product-title");
-const productImage = document.querySelector(".product-image");
-const productPrice = document.querySelector(".product-price");
-const productDescription = document.querySelector(".product-description");
-const addToCartButton = document.querySelector(".add-to-cart");
+const productImage = document.querySelector(".image-container img");
+const productPrice = document.querySelector(".price-value");
+const productDescription = document.querySelector(".product-details p");
+const addToCartButton = document.querySelector(".checkout");
 
 // ✅ Set API Base URL
 const BASE_URL = "https://new-e-com-wirq.onrender.com";

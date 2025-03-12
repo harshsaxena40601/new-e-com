@@ -11,6 +11,23 @@
     />
   </head>
   <body>
+    <button
+      onclick="window.history.back()"
+      style="
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      "
+    >
+      &#8592; Back
+    </button>
+
     <div class="container">
       <header>
         <h1>Product List</h1>
@@ -23,12 +40,6 @@
       </header>
       <div class="listProduct"></div>
     </div>
-    <!-- <button
-      class="viewProductButton"
-      onclick="window.location.href='productDescription.html'"
-    >
-      View Product Details
-    </button> -->
 
     <div class="cart">
       <h2>Cart</h2>

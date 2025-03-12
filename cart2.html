@@ -3,73 +3,755 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Commerce</title>
-    <link rel="stylesheet" href="cart.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
+    <title>Shopping Cart</title>
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+        min-height: 100vh;
+        display: flex;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+        color: #333;
+        line-height: 1.5;
+        padding: 30px 0;
+      }
+
+      /* Main Container */
+      .cart-container {
+        margin: auto;
+        max-width: 1100px;
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 16px;
+        overflow: hidden;
+        background-color: #fff;
+      }
+
+      /* Cart Section */
+      .cart-section {
+        background-color: #fff;
+        padding: 35px;
+        flex: 7;
+      }
+
+      .cart-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+      }
+
+      .cart-title h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .cart-count {
+        color: #777;
+        background-color: #f5f7fa;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+
+      /* Cart Items */
+      .cart-item {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        background-color: #f9fafc;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .cart-item:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
+      }
+
+      .item-image {
+        flex: 1;
+        max-width: 100px;
+      }
+
+      .item-image img {
+        width: 100%;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .item-details {
+        flex: 3;
+        padding: 0 20px;
+      }
+
+      .item-category {
+        color: #777;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .item-name {
+        font-weight: 600;
+        font-size: 18px;
+        color: #1a1a1a;
+      }
+
+      .item-quantity {
+        flex: 2;
+        display: flex;
+        align-items: center;
+      }
+
+      .quantity-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        background: #f0f2f5;
+        border-radius: 50%;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        margin: 0 8px;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      .quantity-btn:hover {
+        background: #e2e6ea;
+        color: #000;
+      }
+
+      .quantity-value {
+        display: inline-block;
+        padding: 6px 14px;
+        border: 1px solid #e5e8ed;
+        border-radius: 6px;
+        font-weight: 500;
+        background-color: white;
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .item-price {
+        flex: 1;
+        text-align: right;
+        font-weight: 600;
+        font-size: 18px;
+        color: #1a1a1a;
+      }
+
+      .remove-btn {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #f0f2f5;
+        cursor: pointer;
+        font-size: 14px;
+        color: #777;
+        margin-left: 15px;
+        transition: all 0.2s ease;
+      }
+
+      .remove-btn:hover {
+        background-color: #ff4d4d;
+        color: white;
+      }
+
+      .back-link {
+        display: flex;
+        align-items: center;
+        margin-top: 35px;
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        padding: 10px 0;
+      }
+
+      .back-link:hover {
+        color: #000;
+        transform: translateX(-5px);
+      }
+
+      .back-arrow {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      /* Summary Section */
+      .summary-section {
+        background-color: #f9fafc;
+        padding: 35px;
+        flex: 3;
+        border-left: 1px solid #f0f2f5;
+      }
+
+      .summary-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #1a1a1a;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 12px 0;
+        font-size: 16px;
+      }
+
+      .summary-divider {
+        height: 1px;
+        background-color: #e5e8ed;
+        margin: 20px 0;
+      }
+
+      .shipping-options {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e5e8ed;
+        border-radius: 8px;
+        background-color: #fff;
+        margin: 12px 0 25px 0;
+        font-size: 15px;
+        color: #333;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-6.5-6.5 1-1 5.5 5.5 5.5-5.5 1 1-6.5 6.5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 96% center;
+        transition: all 0.2s ease;
+      }
+
+      .shipping-options:focus {
+        outline: none;
+        border-color: #4f7df3;
+        box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.15);
+      }
+
+      .promo-container {
+        position: relative;
+        margin: 12px 0 25px 0;
+      }
+
+      .code-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e5e8ed;
+        border-radius: 8px;
+        background-color: #fff;
+        font-size: 15px;
+        transition: all 0.2s ease;
+      }
+
+      .code-input:focus {
+        outline: none;
+        border-color: #4f7df3;
+        box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.15);
+      }
+
+      .apply-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: none;
+        font-weight: 600;
+        color: #4f7df3;
+        cursor: pointer;
+      }
+
+      .apply-btn:hover {
+        color: #3a67d7;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        padding: 16px;
+        background-color: #4f7df3;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 25px;
+        box-shadow: 0 4px 10px rgba(79, 125, 243, 0.25);
+      }
+
+      .checkout-btn:hover {
+        background-color: #3a67d7;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(79, 125, 243, 0.35);
+      }
+
+      .checkout-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(79, 125, 243, 0.2);
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .total-row {
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 15px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e8ed;
+        color: #1a1a1a;
+      }
+
+      .payment-options {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .payment-text {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 10px;
+      }
+
+      .card-icons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 25px;
+        background-color: #e9ecef;
+        border-radius: 4px;
+      }
+
+      /* Empty cart state */
+      .empty-cart {
+        text-align: center;
+        padding: 40px 0;
+        display: none;
+      }
+
+      .empty-cart-img {
+        width: 120px;
+        margin-bottom: 20px;
+        opacity: 0.7;
+      }
+
+      .empty-cart-text {
+        font-size: 18px;
+        color: #777;
+        margin-bottom: 25px;
+      }
+
+      .continue-shopping {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #4f7df3;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .continue-shopping:hover {
+        background-color: #3a67d7;
+        transform: translateY(-2px);
+      }
+
+      /* Sale badge */
+      .sale-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #ff6b6b;
+        color: white;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 12px;
+        z-index: 1;
+      }
+
+      /* Additional flourishes */
+      .savings {
+        color: #4caf50;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 900px) {
+        .cart-container {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 15px 0;
+        }
+
+        .cart-section,
+        .summary-section {
+          padding: 25px;
+        }
+
+        .cart-item {
+          flex-wrap: wrap;
+          padding: 15px;
+        }
+
+        .item-image {
+          flex: 0 0 70px;
+        }
+
+        .item-details {
+          flex: 1 0 calc(100% - 70px - 80px);
+          padding: 0 15px;
+        }
+
+        .item-price {
+          flex: 0 0 80px;
+          text-align: right;
+        }
+
+        .item-quantity {
+          flex: 0 0 100%;
+          justify-content: flex-start;
+          margin-top: 15px;
+          padding-top: 15px;
+          border-top: 1px solid #f0f2f5;
+        }
+
+        .cart-title h2 {
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .item-details {
+          flex: 1 0 100%;
+          padding: 10px 0;
+          order: 2;
+        }
+
+        .item-image {
+          flex: 0 0 70px;
+          order: 1;
+        }
+
+        .item-price {
+          flex: 0 0 calc(100% - 70px);
+          text-align: right;
+          order: 1;
+        }
+
+        .item-quantity {
+          order: 3;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>Product List</h1>
-        <div class="iconCart">
-          <button id="cartButton" class="cartButton">
-            <i class="fas fa-shopping-cart fa-lg" style="color: #727e7e"></i>
-          </button>
-          <div class="totalQuantity">0</div>
+    <div class="cart-container">
+      <!-- Cart Section -->
+      <div class="cart-section">
+        <div class="cart-title">
+          <h2>Your Cart</h2>
+          <span class="cart-count">3 items</span>
         </div>
-      </header>
-      <div class="listProduct">
-        <div class="productBox">
-          <img src="IMG-20241205-WA0017.jpg" />
-          <div class="productContent">
-            <h3>Product 1</h3>
-            <h4>Price: $40</h4>
-            <p class="quantity">Quantity: <input name="" value="2" /></p>
-            <p class="removeArea">
-              <i aria-hidden="true" class="fa fa-trash"></i>
-              <span class="removeButton">Remove</span>
-            </p>
+
+        <!-- Cart Item 1 -->
+        <div class="cart-item">
+          <span class="sale-badge">SALE</span>
+          <div class="item-image">
+            <img src="https://i.imgur.com/1GrakTl.jpg" alt="Cotton T-shirt" />
+          </div>
+          <div class="item-details">
+            <div class="item-category">T-shirt</div>
+            <div class="item-name">Premium Cotton T-shirt</div>
+            <div class="savings">
+              <span class="original-price">₹4,999</span> -30%
+            </div>
+          </div>
+          <div class="item-quantity">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity-value">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <div class="item-price">
+            ₹3,499
+            <span class="remove-btn">×</span>
           </div>
         </div>
-        <div class="productBox">
-          <img src="IMG-20241205-WA0018.jpg" />
-          <div class="productContent">
-            <h3>Product 2</h3>
-            <h4>Price: $40</h4>
-            <p class="quantity">Quantity: <input name="" value="1" /></p>
-            <p class="removeArea">
-              <i aria-hidden="true" class="fa fa-trash"></i>
-              <span class="removeButton">Remove</span>
-            </p>
+
+        <!-- Cart Item 2 -->
+        <div class="cart-item">
+          <div class="item-image">
+            <img src="https://i.imgur.com/ba3tvGm.jpg" alt="Cotton T-shirt" />
+          </div>
+          <div class="item-details">
+            <div class="item-category">T-shirt</div>
+            <div class="item-name">Graphic Design T-shirt</div>
+          </div>
+          <div class="item-quantity">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity-value">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <div class="item-price">
+            ₹3,499
+            <span class="remove-btn">×</span>
           </div>
         </div>
-        <div class="productBox">
-          <img src="IMG-20241205-WA0019.jpg" />
-          <div class="productContent">
-            <h3>Product 3</h3>
-            <h4>Price: $250</h4>
-            <p class="quantity">Quantity: <input name="" value="0" /></p>
-            <p class="removeArea">
-              <i aria-hidden="true" class="fa fa-trash"></i>
-              <span class="removeButton">Remove</span>
-            </p>
+
+        <!-- Cart Item 3 -->
+        <div class="cart-item">
+          <span class="sale-badge">NEW</span>
+          <div class="item-image">
+            <img src="https://i.imgur.com/pHQ3xT3.jpg" alt="Cotton T-shirt" />
+          </div>
+          <div class="item-details">
+            <div class="item-category">T-shirt</div>
+            <div class="item-name">Slim Fit Cotton T-shirt</div>
+          </div>
+          <div class="item-quantity">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity-value">1</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <div class="item-price">
+            ₹3,499
+            <span class="remove-btn">×</span>
+          </div>
+        </div>
+
+        <!-- Empty Cart State (Hidden by default) -->
+        <div class="empty-cart">
+          <img
+            src="/api/placeholder/120/120"
+            alt="Empty Cart"
+            class="empty-cart-img"
+          />
+          <p class="empty-cart-text">Your cart is empty</p>
+          <a href="#" class="continue-shopping">Continue Shopping</a>
+        </div>
+
+        <!-- Back to Shop Link -->
+        <a href="#" class="back-link">
+          <span class="back-arrow">←</span>
+          Continue shopping
+        </a>
+      </div>
+
+      <!-- Summary Section -->
+      <div class="summary-section">
+        <h3 class="summary-title">Order Summary</h3>
+
+        <div class="summary-row">
+          <div>Subtotal (3 items)</div>
+          <div>₹10,497</div>
+        </div>
+
+        <div class="summary-row">
+          <div>Discount</div>
+          <div>-₹1,500</div>
+        </div>
+
+        <div class="form-label">SHIPPING</div>
+        <select class="shipping-options">
+          <option>Standard Delivery - ₹99</option>
+          <option>Express Delivery - ₹199</option>
+          <option>Next Day Delivery - ₹399</option>
+        </select>
+
+        <div class="form-label">PROMO CODE</div>
+        <div class="promo-container">
+          <input type="text" class="code-input" placeholder="Enter your code" />
+          <button class="apply-btn">Apply</button>
+        </div>
+
+        <div class="summary-row total-row">
+          <div>TOTAL</div>
+          <div>₹9,096</div>
+        </div>
+
+        <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+
+        <div class="payment-options">
+          <p class="payment-text">We accept</p>
+          <div class="card-icons">
+            <div class="card-icon"></div>
+            <div class="card-icon"></div>
+            <div class="card-icon"></div>
+            <div class="card-icon"></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="cart">
-      <h2>Cart</h2>
-      <div class="listCart"></div>
-      <div class="buttons">
-        <div class="close">CLOSE</div>
-        <div class="checkout">
-          <a href="checkout.html">CHECKOUT</a>
-        </div>
-      </div>
-    </div>
-    <script src="cart2.js"></script>
+
+    <script>
+      // Add JavaScript functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        // Quantity buttons functionality
+        const minusBtns = document.querySelectorAll(".quantity-btn.minus");
+        const plusBtns = document.querySelectorAll(".quantity-btn.plus");
+
+        minusBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const valueSpan = this.parentNode.querySelector(".quantity-value");
+            let quantity = parseInt(valueSpan.textContent);
+
+            if (quantity > 1) {
+              quantity--;
+              valueSpan.textContent = quantity;
+              updateTotals();
+            }
+          });
+        });
+
+        plusBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const valueSpan = this.parentNode.querySelector(".quantity-value");
+            let quantity = parseInt(valueSpan.textContent);
+
+            quantity++;
+            valueSpan.textContent = quantity;
+            updateTotals();
+          });
+        });
+
+        // Remove buttons functionality
+        const removeBtns = document.querySelectorAll(".remove-btn");
+        removeBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            this.closest(".cart-item").remove();
+            updateCartCount();
+            updateTotals();
+
+            // Show empty cart state if no items
+            if (document.querySelectorAll(".cart-item").length === 0) {
+              document.querySelector(".empty-cart").style.display = "block";
+              document.querySelector(".back-link").style.display = "none";
+            }
+          });
+        });
+
+        // Update cart count
+        function updateCartCount() {
+          const itemCount = document.querySelectorAll(".cart-item").length;
+          document.querySelector(".cart-count").textContent =
+            itemCount + (itemCount === 1 ? " item" : " items");
+
+          // Update subtotal label
+          document.querySelector(
+            ".summary-row:first-of-type div:first-child"
+          ).textContent =
+            "Subtotal (" + itemCount + (itemCount === 1 ? " item)" : " items)");
+        }
+
+        // Update totals
+        function updateTotals() {
+          const items = document.querySelectorAll(".cart-item");
+          let subtotal = 0;
+
+          items.forEach((item) => {
+            const priceText = item
+              .querySelector(".item-price")
+              .textContent.trim()
+              .split("\n")[0];
+            const price = parseFloat(
+              priceText.replace("₹", "").replace(",", "")
+            );
+            const quantity = parseInt(
+              item.querySelector(".quantity-value").textContent
+            );
+            subtotal += price * quantity;
+          });
+
+          // Calculate discount (simplified for demo)
+          const discount = items.length > 0 ? 1500 : 0;
+
+          const shippingOption =
+            document.querySelector(".shipping-options").value;
+          const shipping = parseFloat(shippingOption.split("- ₹")[1] || 99);
+          const total = subtotal - discount + shipping;
+
+          // Format numbers with commas for Indian currency format
+          function formatIndianCurrency(num) {
+            return num.toLocaleString("en-IN");
+          }
+
+          // Update summary
+          document.querySelector(
+            ".summary-row:first-of-type div:last-child"
+          ).textContent = "₹" + formatIndianCurrency(subtotal);
+
+          document.querySelector(
+            ".summary-row:nth-of-type(2) div:last-child"
+          ).textContent = "-₹" + formatIndianCurrency(discount);
+
+          document.querySelector(".total-row div:last-child").textContent =
+            "₹" + formatIndianCurrency(total);
+        }
+
+        // Apply promo code
+        const applyBtn = document.querySelector(".apply-btn");
+        applyBtn.addEventListener("click", function () {
+          const promoInput = document.querySelector(".code-input");
+          if (promoInput.value.trim() !== "") {
+            // Simple example - in real app, you'd validate the code
+            alert("Promo code applied: " + promoInput.value);
+            promoInput.value = "";
+          }
+        });
+
+        // Shipping option change
+        const shippingSelect = document.querySelector(".shipping-options");
+        shippingSelect.addEventListener("change", function () {
+          updateTotals();
+        });
+      });
+    </script>
   </body>
 </html>

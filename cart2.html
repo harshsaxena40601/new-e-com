@@ -752,6 +752,16 @@
           updateTotals();
         });
       });
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const response = await fetch("https://new-e-com-wirq.onrender.com");
+          const data = await response.json();
+          console.log("Server response:", data);
+          // Process data and update the cart UI if needed
+        } catch (error) {
+          console.error("Error connecting to server:", error);
+        }
+      });
     </script>
   </body>
 </html>

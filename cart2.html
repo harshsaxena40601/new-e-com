@@ -23,6 +23,38 @@
         padding: 30px 0;
       }
 
+      /* Back Button Styles */
+      .back-button {
+        position: fixed;
+        top: 30px;
+        left: 30px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 100;
+      }
+
+      .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        background-color: #f7f9fc;
+      }
+
+      .back-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
       /* Main Container */
       .cart-container {
         margin: auto;
@@ -466,6 +498,14 @@
         .cart-title h2 {
           font-size: 24px;
         }
+
+        .back-button {
+          top: 15px;
+          left: 15px;
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+        }
       }
 
       @media (max-width: 480px) {
@@ -493,6 +533,9 @@
     </style>
   </head>
   <body>
+    <!-- Back Button -->
+    <button class="back-button" onclick="goBack()">←</button>
+
     <div class="cart-container">
       <!-- Cart Section -->
       <div class="cart-section">
@@ -629,6 +672,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Back button JavaScript function -->
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+
+    <!-- Original JavaScript file reference -->
     <script src="cart2.js"></script>
   </body>
 </html>

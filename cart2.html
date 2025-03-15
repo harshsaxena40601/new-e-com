@@ -28,38 +28,6 @@
         padding: 30px 0;
       }
 
-      /* Back Button Styles */
-      .back-button {
-        position: fixed;
-        top: 30px;
-        left: 30px;
-        background-color: #fff;
-        color: #333;
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 100;
-      }
-
-      .back-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-        background-color: #f7f9fc;
-      }
-
-      .back-button:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-
       /* Main Container */
       .container {
         margin: auto;
@@ -198,243 +166,9 @@
         color: #1a1a1a;
       }
 
-      .close {
-        width: 28px;
-        height: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background-color: #f0f2f5;
+      .remove-btn {
         cursor: pointer;
-        font-size: 14px;
-        color: #777;
-        margin-left: 15px;
-        transition: all 0.2s ease;
-      }
-
-      .close:hover {
-        background-color: #ff4d4d;
-        color: white;
-      }
-
-      .back-link {
-        display: flex;
-        align-items: center;
-        margin-top: 35px;
-        text-decoration: none;
-        color: #555;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        padding: 10px 0;
-      }
-
-      .back-link:hover {
-        color: #000;
-        transform: translateX(-5px);
-      }
-
-      .back-arrow {
-        margin-right: 10px;
-        font-size: 18px;
-      }
-
-      /* Summary Section */
-      .cart {
-        background-color: #f9fafc;
-        padding: 35px;
-        flex: 3;
-        border-left: 1px solid #f0f2f5;
-      }
-
-      h2 {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 25px;
-        color: #1a1a1a;
-      }
-
-      .summary-row {
-        display: flex;
-        justify-content: space-between;
-        margin: 12px 0;
-        font-size: 16px;
-      }
-
-      .summary-divider {
-        height: 1px;
-        background-color: #e5e8ed;
-        margin: 20px 0;
-      }
-
-      .shipping-options {
-        width: 100%;
-        padding: 12px 15px;
-        border: 1px solid #e5e8ed;
-        border-radius: 8px;
-        background-color: #fff;
-        margin: 12px 0 25px 0;
-        font-size: 15px;
-        color: #333;
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-6.5-6.5 1-1 5.5 5.5 5.5-5.5 1 1-6.5 6.5z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: 96% center;
-        transition: all 0.2s ease;
-      }
-
-      .shipping-options:focus {
-        outline: none;
-        border-color: #4f7df3;
-        box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.15);
-      }
-
-      .promo-container {
-        position: relative;
-        margin: 12px 0 25px 0;
-      }
-
-      .code-input {
-        width: 100%;
-        padding: 12px 15px;
-        border: 1px solid #e5e8ed;
-        border-radius: 8px;
-        background-color: #fff;
-        font-size: 15px;
-        transition: all 0.2s ease;
-      }
-
-      .code-input:focus {
-        outline: none;
-        border-color: #4f7df3;
-        box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.15);
-      }
-
-      .apply-btn {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: none;
-        font-weight: 600;
-        color: #4f7df3;
-        cursor: pointer;
-      }
-
-      .apply-btn:hover {
-        color: #3a67d7;
-      }
-
-      .checkout {
-        width: 100%;
-        padding: 16px;
-        background-color: #4f7df3;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 25px;
-        box-shadow: 0 4px 10px rgba(79, 125, 243, 0.25);
-        text-align: center;
-      }
-
-      .checkout a {
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
-      .checkout:hover {
-        background-color: #3a67d7;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(79, 125, 243, 0.35);
-      }
-
-      .checkout:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 5px rgba(79, 125, 243, 0.2);
-      }
-
-      .form-label {
-        display: block;
-        margin-bottom: 8px;
-        color: #666;
-        font-weight: 500;
-      }
-
-      .total-row {
-        font-weight: 700;
-        font-size: 20px;
-        margin-top: 15px;
-        padding-top: 20px;
-        border-top: 1px solid #e5e8ed;
-        color: #1a1a1a;
-      }
-
-      .payment-options {
-        margin-top: 20px;
-        text-align: center;
-      }
-
-      .payment-text {
-        font-size: 14px;
-        color: #777;
-        margin-bottom: 10px;
-      }
-
-      .card-icons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-      }
-
-      .card-icon {
-        width: 40px;
-        height: 25px;
-        background-color: #e9ecef;
-        border-radius: 4px;
-      }
-
-      /* Empty cart state */
-      .empty-cart {
-        text-align: center;
-        padding: 40px 0;
-        display: none;
-      }
-
-      .empty-cart-img {
-        width: 120px;
-        margin-bottom: 20px;
-        opacity: 0.7;
-      }
-
-      .empty-cart-text {
-        font-size: 18px;
-        color: #777;
-        margin-bottom: 25px;
-      }
-
-      .continue-shopping {
-        display: inline-block;
-        padding: 12px 24px;
-        background-color: #4f7df3;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-      }
-
-      .continue-shopping:hover {
-        background-color: #3a67d7;
-        transform: translateY(-2px);
+        margin-left: 5px;
       }
 
       /* Sale badge */
@@ -477,10 +211,84 @@
         font-size: 24px;
       }
 
-      .buttons {
+      /* Summary Section */
+      .cart {
+        background-color: #f9fafc;
+        padding: 35px;
+        flex: 3;
+        border-left: 1px solid #f0f2f5;
+      }
+
+      h2 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #1a1a1a;
+      }
+
+      .summary-row {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
+        margin: 12px 0;
+        font-size: 16px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: #666;
+        font-weight: 500;
+      }
+
+      .shipping-options {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e5e8ed;
+        border-radius: 8px;
+        background-color: #fff;
+        margin: 12px 0 25px 0;
+        font-size: 15px;
+        color: #333;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-6.5-6.5 1-1 5.5 5.5 5.5-5.5 1 1-6.5 6.5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: 96% center;
+      }
+
+      .promo-container {
+        position: relative;
+        margin: 12px 0 25px 0;
+      }
+
+      .code-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e5e8ed;
+        border-radius: 8px;
+        background-color: #fff;
+        font-size: 15px;
+      }
+
+      .apply-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: none;
+        font-weight: 600;
+        color: #4f7df3;
+        cursor: pointer;
+      }
+
+      .total-row {
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 15px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e8ed;
+        color: #1a1a1a;
       }
 
       /* Responsive Design */
@@ -530,14 +338,6 @@
         h1 {
           font-size: 24px;
         }
-
-        button {
-          top: 15px;
-          left: 15px;
-          width: 40px;
-          height: 40px;
-          font-size: 18px;
-        }
       }
 
       @media (max-width: 480px) {
@@ -565,24 +365,6 @@
     </style>
   </head>
   <body>
-    <!-- Back Button -->
-    <button
-      onclick="window.history.back()"
-      style="
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        padding: 10px 15px;
-        background-color: #373235;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      "
-    >
-      &#8592; Back
-    </button>
-
     <div class="container">
       <header>
         <h1>Product List</h1>
@@ -660,43 +442,41 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="cart">
-      <h2>Cart</h2>
-      <div class="listCart">
-        <div class="summary-row">
-          <div>Subtotal (3 items)</div>
-          <div>₹10,497</div>
-        </div>
+      <div class="cart">
+        <h2>Cart</h2>
+        <div class="listCart">
+          <div class="summary-row">
+            <div>Subtotal (3 items)</div>
+            <div>₹10,497</div>
+          </div>
 
-        <div class="summary-row">
-          <div>Discount</div>
-          <div>-₹1,500</div>
-        </div>
+          <div class="summary-row">
+            <div>Discount</div>
+            <div>-₹1,500</div>
+          </div>
 
-        <div class="form-label">SHIPPING</div>
-        <select class="shipping-options">
-          <option>Standard Delivery - ₹99</option>
-          <option>Express Delivery - ₹199</option>
-          <option>Next Day Delivery - ₹399</option>
-        </select>
+          <div class="form-label">SHIPPING</div>
+          <select class="shipping-options">
+            <option>Standard Delivery - ₹99</option>
+            <option>Express Delivery - ₹199</option>
+            <option>Next Day Delivery - ₹399</option>
+          </select>
 
-        <div class="form-label">PROMO CODE</div>
-        <div class="promo-container">
-          <input type="text" class="code-input" placeholder="Enter your code" />
-          <button class="apply-btn">Apply</button>
-        </div>
+          <div class="form-label">PROMO CODE</div>
+          <div class="promo-container">
+            <input
+              type="text"
+              class="code-input"
+              placeholder="Enter your code"
+            />
+            <button class="apply-btn">Apply</button>
+          </div>
 
-        <div class="summary-row total-row">
-          <div>TOTAL</div>
-          <div>₹9,096</div>
-        </div>
-      </div>
-      <div class="buttons">
-        <div class="close">CLOSE</div>
-        <div class="checkout">
-          <a href="checkout.html">CHECKOUT</a>
+          <div class="summary-row total-row">
+            <div>TOTAL</div>
+            <div>₹9,096</div>
+          </div>
         </div>
       </div>
     </div>

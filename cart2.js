@@ -144,23 +144,18 @@ function updateQuantity(productId, type) {
   }
 }
 
-// ✅ Toggle Cart View
+// ✅ Toggle Cart View - Using CSS classes instead of inline styles
 function toggleCart() {
-  if (cart.style.right === "-100%" || cart.style.right === "") {
-    cart.style.right = "0";
-    container.style.transform = "translateX(-400px)";
-  } else {
-    cart.style.right = "-100%";
-    container.style.transform = "translateX(0)";
-  }
+  cart.classList.toggle("active");
+  container.classList.toggle("shifted");
 }
 
 // ✅ Event Listeners for Cart Actions
 iconCart.addEventListener("click", toggleCart);
 cartButton.addEventListener("click", toggleCart);
 close.addEventListener("click", () => {
-  cart.style.right = "-100%";
-  container.style.transform = "translateX(0)";
+  cart.classList.remove("active");
+  container.classList.remove("shifted");
 });
 
 // ✅ Initialize App
